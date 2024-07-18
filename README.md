@@ -21,16 +21,16 @@ The project consists of a Homepage to display popular movies and a Journal Page 
 
 ### 2. Create Directory Structure
 
-movie-dairy
-├── .gitignore
-├── config.js.example
-├── index.html
-├── journal.html
-├── journal.js
-├── LICENSE
-├── main.js
-├── README.md
-└── tailwind.config.js
+movie-dairy/
+ • .gitignore
+ • config.js.example
+ • index.html
+ • journal.html
+ • journal.js
+ • LICENSE
+ • main.js
+ • README.md
+ • tailwind.config.js
 
 
 ### 3. CSS Styling with TailwindCSS
