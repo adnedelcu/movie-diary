@@ -1,7 +1,5 @@
 import { API_KEY } from './config.js';
 
-console.log(API_KEY);
-
 const url = 'https://api.themoviedb.org/3/movie/popular';
 const headers = {
     'Authorization': `Bearer ${API_KEY}`,
