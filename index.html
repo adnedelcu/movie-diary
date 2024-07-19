@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,8 @@
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet" />
+
+
     <style>
       @keyframes float {
         0% {
@@ -60,13 +63,25 @@
       }
     </style>
   </head>
+
+<!-- Body -->
+
   <body class="bg-gray-900 text-white">
+
+<!-- Header -->
+
     <header>
       <nav class="container mx-auto flex justify-between items-center py-6">
+
+<!-- Logo -->
+
         <a
           href="./index.html"
           class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">\:\ALTschool</a>
-        <div class="space-x-4">
+        <div class="space-x-4"> 
+
+<!-- Links -->
+
           <a
             href="./index.html"
             class="text-xl hover:text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 transition duration-300">Discover</a>
@@ -76,11 +91,20 @@
             Diary</a>
         </div>
       </nav>
+
+<!-- Hero -->
+
       <div class="container mx-auto text-center py-20">
+
+<!-- Content -->
+
         <h1 class="text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-cyan-200 floating">ALTschool Movie Diary</h1>
         <p class="text-2xl mb-12">
           Your personal journey through the world of cinema begins here.
         </p>
+
+<!-- Search -->
+
         <div
           class="flex items-center justify-center space-x-4 max-w-3xl mx-auto">
           <input
@@ -96,22 +120,37 @@
       </div>
     </header>
 
-    <!-- Movie Container / Grid -->
+<!-- Movie Container / Grid -->
 
     <main class="container mx-auto py-20 px-4">
-      <h2 class="text-4xl font-bold mb-12 text-center">Trending Movies</h2>
+      <h2 class="text-4xl font-bold mb-12 text-center">
+        Trending Movies</h2>
+
       <div class="movie-grid">
         <template id="movie-card">
           <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+
+<!-- Movie Poster -->
+
             <img
               src="https://c8.alamy.com/comp/AX539P/dune-poster-for-1984-dino-de-laurentiis-film-with-sting-AX539P.jpg"
               alt="Movie Poster"
               class="movie-poster" />
+
+<!-- Movie Details || Name-->
+
             <div class="p-4">
               <h3 class="text-xl font-semibold mb-2 text-center truncate">
                 DUNE
               </h3>
-              <p class="text-gray-400 mb-4 text-center">1984 | Science Fiction</p>
+
+<!-- Movie Details || Year | Genre -->
+
+              <p class="text-gray-400 mb-4 text-center">
+                1984 | Science Fiction</p>
+
+<!-- Movie Details || Add to Diary -->
+
               <button class="gradient-border w-full">
                 <span class="flex items-center justify-center">
                   <i class="fas fa-bookmark mr-2"></i>Add to Diary
@@ -120,6 +159,9 @@
             </div>
           </div>
         </template>
+
+<!-- Movie Cards Template // edit for loop as you wish -->
+
         <script>
           const movieCardTemplate = document.getElementById('movie-card').content;
           const movieGrid = document.querySelector('.movie-grid');
@@ -131,6 +173,8 @@
       </div>
     </main>
 
+<!-- Footer -->
+
     <footer class="bg-gray-800 text-white py-10">
       <div class="container mx-auto text-center">
         <p>&copy; 2024 ALTschool. Embark on your cinematic journey.</p>
@@ -138,4 +182,3 @@
     </footer>
   </body>
 </html>
-
