@@ -8,7 +8,7 @@ const headers = {
 const searchBar = document.querySelector('input');
 const searchInput = searchBar.value;
 
-const searchUrl = `https://api.themoviedb.org/3/search/movie?query=${searchInput}&`
+
 
 const genres = [
       {
@@ -148,15 +148,81 @@ fetch(url, { headers })
     .catch(error => console.error(error));
 
 //search-function
-    fetch(searchUrl, { headers })
+/*    fetch(searchUrl, { headers })
     .then((response) => {
         if(!response.ok) throw new Error ('Sorry. Someting went wrong.');
         return response.json()})
     
     .then(data => data.results)
     .catch(error => { console.error(error);
-return[] });
+return[] });*/
 
+searchBar.addEventListener('input', debounce(handleSearch, 500));
+
+async function handleSearch(event) {
+    const query = event.target.value;
+    console.log(query);
+    const searchUrl = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&api_key=${API_KEY}`
+    if (query.length === 0) {
+        resultDiv.innerHTML ='';
+        return;
+    }
+
+    try{
+        const response = await fetch(searchUrl, { headers});
+        const data = await response.json();
+        console.log(data);
+        displayResults(data);
+    } catch (error) {
+        console.error('Error fetching results:', error);
+    }
+}
+
+function displayResults(data) {
+    resultDiv.innerHTML = '';
+
+    if (data.results && data.results.length > 0) {
+        data.results.forEach(movie => {
+            const templateDiv = document.createElement('div');
+            templateDiv.classList.add('bg-gray-800', 'rounded-lg', 'overflow-hidden', 'shadow-lg');
+            const poster = document.createElement('img');
+            const imgUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+            poster.src = imgUrl;
+            poster.classList.add('movie-poster');
+            const titleDiv = document.createElement('div');
+            titleDiv.classList.add('p-4');
+            const movieTitle = document.createElement('h3');
+            movieTitle.textContent = movie.original_title.toUpperCase();
+            movieTitle.classList.add('text-xl', 'font-semibold', 'mb-2', 'mt-1', 'ml-1', 'text-center', 'truncate')
+            
+            const descriptionP = document.createElement('p');
+            descriptionP.classList.add('text-gray-400', 'mb-4', 'text-center');
+            const genreId = movie.genre_ids[0];
+            const genre = genres.find(x => x.id === genreId);
+            descriptionP.textContent = movie.release_date.slice(0,4) + " | " + genre.name;
+            
+            resultDiv.appendChild(templateDiv);
+            templateDiv.appendChild(poster);
+            templateDiv.appendChild(movieTitle);
+            poster.alt = movieTitle;
+            templateDiv.appendChild(descriptionP);
+            templateDiv.appendChild(diaryBtn);
+            diaryBtn.appendChild(btnSpan);
+            
+        });
+    } else {
+        resultDiv.textContent = "No results found.";
+    }
+}
+
+ // Utility function to debounce the search input
+ function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
 
 
 
