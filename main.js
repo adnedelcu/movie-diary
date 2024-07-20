@@ -84,18 +84,58 @@ const genres = [
       }
     ];
 
+const template = document.getElementById('movie-card');
+
+
+
 
 fetch(url, { headers })
-    .then(response => response.json())
+    .then((response) => {
+        if(!response.ok) throw new Error ('Sorry. Someting went wrong.');
+        return response.json()})
+    
     .then((data => {
         console.log(data);
         data.results.forEach(movie => {
-            console.log(movie.original_title.toUpperCase());
-            console.log(movie.release_date.slice(0,4));
+            const templateDiv = document.createElement('div');
+            templateDiv.classList.add('bg-gray-800', 'rounded-lg', 'overflow-hidden', 'shadow-lg');
+            const poster = document.createElement('img');
+            const imgUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+            poster.src = imgUrl;
+            poster.classList.add('movie-poster');
+            
+            const titleDiv = document.createElement('div');
+            titleDiv.classList.add('p-4');
+            const movieTitle = document.createElement('h3');
+            movieTitle.textContent = movie.original_title.toUpperCase();
+
+            const descriptionP = document.createElement('p');
             const genreId = movie.genre_ids[0];
             const genre = genres.find(x => x.id === genreId);
+            descriptionP.textContent = movie.release_date.slice(0,4) + " | " + genre.name;
+
+            const diaryBtn = document.createElement('button');
+            diaryBtn.classList.add('gradient-border', 'w-full');
+            const btnSpan = document.createElement('span');
+            btnSpan.classList.add('flex', 'items-center', 'justify-center', 'gradient-border-span');
+            const btnItem = document.createElement('i');
+            btnItem.classList.add('fas', 'fa-bookmark', 'mr-2');
+            btnSpan.textContent = "Add to Diary  ";
+
+            template.appendChild(templateDiv);
+            templateDiv.appendChild(poster);
+            templateDiv.appendChild(movieTitle);
+            poster.alt = movieTitle;
+            templateDiv.appendChild(descriptionP);
+            templateDiv.appendChild(diaryBtn);
+            diaryBtn.appendChild(btnSpan);
+            btnSpan.appendChild(btnItem);
+            
+
+
+            console.log(movie.original_title.toUpperCase());
+            console.log(movie.release_date.slice(0,4));
             console.log(genre.name);
-            const imgUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
             console.log(imgUrl);    
         });
         
