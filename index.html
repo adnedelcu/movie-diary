@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ALTschool | Movie Diary</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
+    <script type="module" src="main.js"></script>
+    <!--<link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet" />
+      rel="stylesheet" /> -->
 
 
     <style>
@@ -55,7 +56,7 @@
         padding: 3px;
         border-radius: 0.375rem;
       }
-      .gradient-border span {
+      .gradient-border-span {
         display: block;
         background: #4a5568;
         padding: 0.5rem 1rem;
@@ -112,13 +113,18 @@
             placeholder="Explore movies..."
             class="w-full bg-gray-800 text-white px-6 py-3 rounded" />
           <button class="gradient-border w-28 hover: hover:text-slate-950 hover:animate-pulse">
-            <span class="flex items-center">
+            <span class="gradient-border-span flex items-center">
               <i class="fas fa-search mr-1"></i>
             </span>
           </button>
         </div>
       </div>
     </header>
+
+<!-- Movie Grid for Search Results -->
+<div id="grid-search-results" class="movie-grid">
+
+</div>
 
 <!-- Movie Container / Grid -->
 
@@ -127,29 +133,29 @@
         Trending Movies</h2>
 
       <div class="movie-grid">
-        <template id="movie-card">
-          <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+        <div id="movie-card" class="movie-grid">
+          <!-- <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
 
-<!-- Movie Poster -->
+ Movie Poster 
 
             <img
               src="https://c8.alamy.com/comp/AX539P/dune-poster-for-1984-dino-de-laurentiis-film-with-sting-AX539P.jpg"
               alt="Movie Poster"
               class="movie-poster" />
 
-<!-- Movie Details || Name-->
+ Movie Details || Name
 
             <div class="p-4">
               <h3 class="text-xl font-semibold mb-2 text-center truncate">
                 DUNE
               </h3>
 
-<!-- Movie Details || Year | Genre -->
+ Movie Details || Year | Genre 
 
               <p class="text-gray-400 mb-4 text-center">
                 1984 | Science Fiction</p>
 
-<!-- Movie Details || Add to Diary -->
+ Movie Details || Add to Diary 
 
               <button class="gradient-border w-full">
                 <span class="flex items-center justify-center">
@@ -157,10 +163,10 @@
                 </span>
               </button>
             </div>
-          </div>
-        </template>
+          </div>-->
+        </div>
 
-<!-- Movie Cards Template // edit for loop as you wish -->
+<!-- Movie Cards Template // edit for loop as you wish 
 
         <script>
           const movieCardTemplate = document.getElementById('movie-card').content;
@@ -168,8 +174,8 @@
           for (let i = 0; i < 3; i++) {
             const movieCardClone = movieCardTemplate.cloneNode(true);
             movieGrid.appendChild(movieCardClone);
-          }
-        </script>
+        }
+        </script>-->
       </div>
     </main>
 
