@@ -108,8 +108,10 @@ fetch(url, { headers })
             titleDiv.classList.add('p-4');
             const movieTitle = document.createElement('h3');
             movieTitle.textContent = movie.original_title.toUpperCase();
-
+            movieTitle.classList.add('text-xl', 'font-semibold', 'mb-2', 'mt-1', 'ml-1', 'text-center', 'truncate')
+            
             const descriptionP = document.createElement('p');
+            descriptionP.classList.add('text-gray-400', 'mb-4', 'text-center');
             const genreId = movie.genre_ids[0];
             const genre = genres.find(x => x.id === genreId);
             descriptionP.textContent = movie.release_date.slice(0,4) + " | " + genre.name;
@@ -118,9 +120,7 @@ fetch(url, { headers })
             diaryBtn.classList.add('gradient-border', 'w-full');
             const btnSpan = document.createElement('span');
             btnSpan.classList.add('flex', 'items-center', 'justify-center', 'gradient-border-span');
-            const btnItem = document.createElement('i');
-            btnItem.classList.add('fas', 'fa-bookmark', 'mr-2');
-            btnSpan.textContent = "Add to Diary  ";
+            btnSpan.innerHTML = "<i class='fas fa-bookmark mr-2'></i>Add to Diary";
 
             template.appendChild(templateDiv);
             templateDiv.appendChild(poster);
@@ -129,7 +129,7 @@ fetch(url, { headers })
             templateDiv.appendChild(descriptionP);
             templateDiv.appendChild(diaryBtn);
             diaryBtn.appendChild(btnSpan);
-            btnSpan.appendChild(btnItem);
+            
             
 
 
