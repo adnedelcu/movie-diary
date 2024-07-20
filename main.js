@@ -200,14 +200,21 @@ function displayResults(data) {
             const genreId = movie.genre_ids[0];
             const genre = genres.find(x => x.id === genreId);
             descriptionP.textContent = movie.release_date.slice(0,4) + " | " + genre.name;
+
+            const diaryBtn = document.createElement('button');
+            diaryBtn.classList.add('gradient-border', 'w-full');
+            const btnSpan = document.createElement('span');
+            btnSpan.classList.add('flex', 'items-center', 'justify-center', 'gradient-border-span');
+            btnSpan.innerHTML = "<i class='fas fa-bookmark mr-2'></i>Add to Diary";
             
-            resultDiv.appendChild(templateDiv);
+            
             templateDiv.appendChild(poster);
             templateDiv.appendChild(movieTitle);
             poster.alt = movieTitle;
             templateDiv.appendChild(descriptionP);
             templateDiv.appendChild(diaryBtn);
             diaryBtn.appendChild(btnSpan);
+            resultDiv.appendChild(templateDiv);
             
         });
     } else {
