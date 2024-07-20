@@ -105,7 +105,7 @@ fetch(url, { headers })
             const templateDiv = document.createElement('div');
             templateDiv.classList.add('bg-gray-800', 'rounded-lg', 'overflow-hidden', 'shadow-lg');
             const poster = document.createElement('img');
-            const imgUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+            const imgUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "https://i.pinimg.com/originals/cd/23/c7/cd23c7a8d049049fd1b0ef281f0300cb.jpg";
             poster.src = imgUrl;
             poster.classList.add('movie-poster');
             
@@ -119,7 +119,7 @@ fetch(url, { headers })
             descriptionP.classList.add('text-gray-400', 'mb-4', 'text-center');
             const genreId = movie.genre_ids[0];
             const genre = genres.find(x => x.id === genreId);
-            descriptionP.textContent = movie.release_date.slice(0,4) + " | " + genre.name;
+            descriptionP.textContent = (movie.release_date ? movie.release_date.slice(0, 4) : 'Unknown Year') + " | " + (genre?.name || 'Unknown Genre');
 
             const diaryBtn = document.createElement('button');
             diaryBtn.classList.add('gradient-border', 'w-full');
@@ -130,7 +130,7 @@ fetch(url, { headers })
             template.appendChild(templateDiv);
             templateDiv.appendChild(poster);
             templateDiv.appendChild(movieTitle);
-            poster.alt = movieTitle;
+            poster.alt = movie.original_title;
             templateDiv.appendChild(descriptionP);
             templateDiv.appendChild(diaryBtn);
             diaryBtn.appendChild(btnSpan);
@@ -147,20 +147,11 @@ fetch(url, { headers })
         }))
     .catch(error => console.error(error));
 
-//search-function
-/*    fetch(searchUrl, { headers })
-    .then((response) => {
-        if(!response.ok) throw new Error ('Sorry. Someting went wrong.');
-        return response.json()})
-    
-    .then(data => data.results)
-    .catch(error => { console.error(error);
-return[] });*/
 
-searchBar.addEventListener('input', debounce(handleSearch, 500));
+searchBar.addEventListener('input', debounce(handleSearch, 700));
 
 async function handleSearch(event) {
-    const query = event.target.value;
+    const query = event.target.value.trim();
     console.log(query);
     const searchUrl = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&api_key=${API_KEY}`
     if (query.length === 0) {
@@ -186,7 +177,7 @@ function displayResults(data) {
             const templateDiv = document.createElement('div');
             templateDiv.classList.add('bg-gray-800', 'rounded-lg', 'overflow-hidden', 'shadow-lg');
             const poster = document.createElement('img');
-            const imgUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+            const imgUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "https://i.pinimg.com/originals/cd/23/c7/cd23c7a8d049049fd1b0ef281f0300cb.jpg";
             poster.src = imgUrl;
             poster.classList.add('movie-poster');
             const titleDiv = document.createElement('div');
@@ -199,7 +190,7 @@ function displayResults(data) {
             descriptionP.classList.add('text-gray-400', 'mb-4', 'text-center');
             const genreId = movie.genre_ids[0];
             const genre = genres.find(x => x.id === genreId);
-            descriptionP.textContent = movie.release_date.slice(0,4) + " | " + genre.name;
+            descriptionP.textContent = (movie.release_date ? movie.release_date.slice(0, 4) : 'Unknown Year') + " | " + (genre?.name || 'Unknown Genre');
 
             const diaryBtn = document.createElement('button');
             diaryBtn.classList.add('gradient-border', 'w-full');
@@ -210,14 +201,15 @@ function displayResults(data) {
             
             templateDiv.appendChild(poster);
             templateDiv.appendChild(movieTitle);
-            poster.alt = movieTitle;
+            poster.alt = movieTitle.original_title;
             templateDiv.appendChild(descriptionP);
             templateDiv.appendChild(diaryBtn);
             diaryBtn.appendChild(btnSpan);
             resultDiv.appendChild(templateDiv);
             
         });
-    } else {
+    }     
+    else {
         resultDiv.textContent = "No results found.";
     }
 }
@@ -229,66 +221,5 @@ function displayResults(data) {
         clearTimeout(timeout);
         timeout = setTimeout(() => func.apply(this, args), wait);
     };
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*function updateResultDiv(movies) {
-    resultDiv.innerHTML = ''; // Clear existing content
-    data.results.forEach(movie => {
-        const movieElement = document.createElement('div');
-        movieElement.classList.add('bg-gray-800', 'rounded-lg', 'overflow-hidden', 'shadow-lg');
-        const genreId = movie.genre_ids[0];
-            const genre = genres.find(x => x.id === genreId);
-        movieElement.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.original_title.toUpperCase()}">
-            <h3 class="text-xl font-semibold mb-2 text-center truncate">${movie.original_title.toUpperCase()}</h3>
-            <p class="text-gray-400 mb-4 text-center">${movie.release_date.slice(0,4)} | ${genre.name}</p>
-        `;
-        resultDiv.appendChild(movieElement);
-    });
-}
-
-
-searchBar.addEventListener('input', (event) => {
-    const query = event.target.value.trim(); 
-    
-    if (query.length > 2) { 
-        fetchMovies(query)
-            .then    
-            (movies => {
-                 updateResultDiv(movies); 
-            })
-        .catch(error => {
-            console.error(error);
- } );
-}
- 
- else{
-    resultDiv.innerHTML = ''; //Clear the grid if query is too short
- } 
-    });*/
-    
+} 
 
