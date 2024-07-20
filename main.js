@@ -151,7 +151,7 @@ fetch(url, { headers })
 searchBar.addEventListener('input', debounce(handleSearch, 500));
 
 async function handleSearch(event) {
-    const query = event.target.value;
+    const query = event.target.value.trim();
     console.log(query);
     const searchUrl = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&api_key=${API_KEY}`
     if (query.length === 0) {
