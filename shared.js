@@ -1,4 +1,12 @@
-import { updateMovie } from "./journal.js";
+export function updateMovie(movie) {
+    const journal = getJournal();
+    if (!isInJournal(movie)) {
+        return;
+    }
+
+    journal.splice(journal.findIndex(entry => entry.id === movie.id), 1, movie);
+    updateJournal(journal);
+}
 
 export function addToJournal(movie) {
     const journal = getJournal();
