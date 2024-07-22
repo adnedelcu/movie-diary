@@ -229,10 +229,10 @@ export const createMovieCard = (movie, isDiary = false) => {
         if (isDiary) {
             const showNotesBtn = document.createElement('button');
             showNotesBtn.type = 'button';
-            showNotesBtn.classList.add('bg-blue-400', 'h-10', 'w-full', 'rounded-lg', 'hover:bg-blue-700');
+            showNotesBtn.classList.add('gradient-border', 'w-full');
             const notesSpan = document.createElement('span');
-            notesSpan.classList.add('flex', 'items-center', 'justify-center');
-            notesSpan.innerHTML = '<i class="fas fa-note mr-2"></i>Show notes';
+            notesSpan.classList.add('flex', 'items-center', 'justify-center', 'gradient-border-span');
+            notesSpan.innerHTML = '<i class="fas fa-note-sticky mr-2"></i>Show notes';
             showNotesBtn.appendChild(notesSpan);
 
             showNotesBtn.addEventListener('click', () => {
@@ -240,10 +240,10 @@ export const createMovieCard = (movie, isDiary = false) => {
             });
 
             const removeFromDiaryBtn = document.createElement('button');
-            removeFromDiaryBtn.classList.add('bg-red-500', 'h-10', 'w-full', 'rounded-lg', 'hover:bg-red-700');
+            removeFromDiaryBtn.classList.add('gradient-border', 'w-full');
             const btnSpan = document.createElement('span');
-            btnSpan.classList.add('flex', 'items-center', 'justify-center');
-            btnSpan.innerHTML = "<i class='fas fa-xmark mr-2'></i>Remove to Diary";
+            btnSpan.classList.add('flex', 'items-center', 'justify-center', 'gradient-border-span');
+            btnSpan.innerHTML = "<i class='fas fa-xmark mr-2'></i>Remove from Diary";
             removeFromDiaryBtn.appendChild(btnSpan);
 
             removeFromDiaryBtn.addEventListener('click', () => {
