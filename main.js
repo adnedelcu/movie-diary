@@ -1,7 +1,12 @@
 import { API_KEY } from './config.js';
 import { createMovieCard } from './shared.js';
 
-const url = 'https://api.themoviedb.org/3/movie/popular';
+const searchParams = new URLSearchParams(window.location.search);
+
+let maxPages = 1;
+const currentPage = parseInt(searchParams.get('page') || '1');
+
+const url = `https://api.themoviedb.org/3/movie/popular?page=${currentPage}`;
 const headers = {
     'Authorization': `Bearer ${API_KEY}`,
 }
@@ -13,6 +18,9 @@ const searchInput = searchBar.value;
 const template = document.getElementById('movie-card');
 const resultDiv = document.getElementById('grid-search-results');
 
+const currentPageEl = document.getElementById('currentPage');
+const maxPagesEl = document.getElementById('maxPages');
+currentPageEl.innerText = currentPage;
 
 // Popular Movies List
 fetch(url, { headers })
@@ -22,6 +30,8 @@ fetch(url, { headers })
 
     .then((data => {
         console.log(data);
+        maxPages = data.total_pages;
+        updatePagination();
         data.results.forEach(movie => {
             /* const templateDiv = document.createElement('div');
             templateDiv.classList.add('bg-gray-800', 'rounded-lg', 'overflow-hidden', 'shadow-lg');
@@ -46,6 +56,11 @@ fetch(url, { headers })
             templateDiv.appendChild(movieTitle);
             poster.alt = movie.original_title;
             templateDiv.appendChild(descriptionP);
+
+            templateDiv.appendChild(diaryBtn);
+            diaryBtn.appendChild(btnSpan);
+
+
 
             if (!isInJournal(movie)) {
                 const diaryBtn = document.createElement('button');
@@ -120,6 +135,15 @@ function displayResults(data) {
             const genre = genres.find(x => x.id === genreId);
             descriptionP.textContent = (movie.release_date ? movie.release_date.slice(0, 4) : 'Unknown Year') + " | " + (genre?.name || 'Unknown Genre');
 
+
+            const diaryBtn = document.createElement('button');
+            diaryBtn.classList.add('gradient-border', 'w-full');
+            const btnSpan = document.createElement('span');
+            btnSpan.classList.add('flex', 'items-center', 'justify-center', 'gradient-border-span');
+            btnSpan.innerHTML = "<i class='fas fa-bookmark mr-2'></i>Add to Diary";
+
+
+
             templateDiv.appendChild(poster);
             templateDiv.appendChild(movieTitle);
             poster.alt = movieTitle.original_title;
@@ -159,4 +183,56 @@ function displayResults(data) {
         timeout = setTimeout(() => func.apply(this, args), wait);
     };
 }
+
+
+function updatePagination() {
+    maxPagesEl.innerText = maxPages;
+    const navEl = document.getElementById('pagination');
+
+    const firstPageEl = document.createElement('a');
+    firstPageEl.classList.add('relative', 'inline-flex', 'items-center', 'rounded-l-md', 'px-2', 'py-2', 'text-gray-400', 'ring-1', 'ring-inset', 'ring-gray-300', 'hover:bg-gray-50', 'focus:z-20', 'focus:outline-offset-0');
+    firstPageEl.innerHTML = '<span class="sr-only">First</span>&lt;&lt;';
+    // firstPageEl.href = 'nohref';
+    if (currentPage > 1) {
+        firstPageEl.href = `${window.location.origin}${window.location.pathname}?page=1`;
+    }
+    navEl.appendChild(firstPageEl);
+
+    const prevPageEl = document.createElement('a');
+    prevPageEl.classList.add('relative', 'inline-flex', 'items-center', 'px-2', 'py-2', 'text-gray-400', 'ring-1', 'ring-inset', 'ring-gray-300', 'hover:bg-gray-50', 'focus:z-20', 'focus:outline-offset-0');
+    prevPageEl.innerHTML = '<span class="sr-only">Previous</span>&lt;';
+    // prevPageEl.href = 'nohref';
+    if (currentPage > 1) {
+        prevPageEl.href = `${window.location.origin}${window.location.pathname}?page=${currentPage-1}`;
+    }
+
+    navEl.appendChild(prevPageEl);
+
+    const pageEl = document.createElement('a');
+    pageEl.classList.add('relative', 'z-10', 'inline-flex', 'items-center', 'bg-indigo-600', 'px-4', 'py-2', 'text-sm', 'font-semibold', 'text-white', 'focus:z-20', 'focus-visible:outline', 'focus-visible:outline-2', 'focus-visible:outline-offset-2', 'focus-visible:outline-indigo-600');
+    pageEl.ariaCurrent = 'page';
+    pageEl.innerHTML = currentPage;
+    navEl.appendChild(pageEl);
+
+    const nextPageEl = document.createElement('a');
+    nextPageEl.classList.add('relative', 'inline-flex', 'items-center', 'px-2', 'py-2', 'text-gray-400', 'ring-1', 'ring-inset', 'ring-gray-300', 'hover:bg-gray-50', 'focus:z-20', 'focus:outline-offset-0');
+    nextPageEl.innerHTML = '<span class="sr-only">Next</span>&gt;';
+    // nextPageEl.href = 'nohref';
+    if (currentPage < maxPages) {
+        nextPageEl.href = `${window.location.origin}${window.location.pathname}?page=${currentPage+1}`;
+    }
+
+    navEl.appendChild(nextPageEl);
+
+    const lastPageEl = document.createElement('a');
+    lastPageEl.classList.add('relative', 'inline-flex', 'items-center', 'rounded-r-md', 'px-2', 'py-2', 'text-gray-400', 'ring-1', 'ring-inset', 'ring-gray-300', 'hover:bg-gray-50', 'focus:z-20', 'focus:outline-offset-0');
+    lastPageEl.innerHTML = '<span class="sr-only">Last</span>&gt;&gt;';
+    // lastPageEl.href = 'nohref';
+    if (currentPage < maxPages) {
+        lastPageEl.href = `${window.location.origin}${window.location.pathname}?page=${maxPages}`;
+    }
+
+    navEl.appendChild(lastPageEl);
+}
+
 
