@@ -47,6 +47,59 @@
       padding: 0.5rem 1rem;
       border-radius: 0.25rem;
     }
+    html:has(dialog[open]) {
+      overflow: hidden;
+    }
+
+    @keyframes scaleDown {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20%);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    dialog[open]::backdrop {
+      backdrop-filter: blur(5px);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      dialog {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      dialog.showing {
+        animation: slideInUp 0.3s ease-out forwards;
+      }
+
+      dialog.closing {
+        animation: scaleDown 0.3s ease-in forwards;
+      }
+    }
+
+    .close-button {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -80,8 +133,8 @@
 
   <!-- Movie Container / Grid -->
   <main class="container mx-auto py-20 px-4">
-    <h2 class="text-4xl font-bold mb-12 text-center">Trending Movies</h2>
-    <div class="movie-grid">
+    <h2 class="text-4xl font-bold mb-12 text-center">Your Movie Diary</h2>
+    <div id="movie-grid" class="movie-grid">
       <template id="movie-card">
         <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
           <!-- Movie Poster -->
@@ -103,12 +156,12 @@
 
       <!-- Movie Cards Template // edit for loop as you wish -->
       <script>
-        const movieCardTemplate = document.getElementById('movie-card').content;
-        const movieGrid = document.querySelector('.movie-grid');
-        for (let i = 0; i < 24; i++) {
-          const movieCardClone = movieCardTemplate.cloneNode(true);
-          movieGrid.appendChild(movieCardClone);
-        }
+        // const movieCardTemplate = document.getElementById('movie-card').content;
+        // const movieGrid = document.querySelector('.movie-grid');
+        // for (let i = 0; i < 24; i++) {
+        //   const movieCardClone = movieCardTemplate.cloneNode(true);
+        //   movieGrid.appendChild(movieCardClone);
+        // }
       </script>
     </div>
   </main>
@@ -119,6 +172,35 @@
       <p>&copy; 2024 ALTschool. Embark on your cinematic journey.</p>
     </div>
   </footer>
+
+  <dialog id="modal" class="relative p-6 bg-white rounded-lg shadow-lg w-1/2">
+    <button id="closeModalTop" class="close-button">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-700 hover:text-gray-900" fill="none"
+        viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <h2 class="mb-4 text-lg font-semibold" id="movieTitle"></h2>
+
+    <ul id="movieNotes"></ul>
+
+    <label for="new-note" class="mb-6">
+      New note
+      <input type="text" id="new-note" name="new-note" placeholder="Enter your note..." class="w-full bg-gray-800 text-white px-6 py-3 rounded" required>
+    </label>
+
+    <div class="flex justify-end space-x-2">
+      <button id="addNote" class="px-4 py-2 text-black bg-green-700 rounded">
+        Add note
+      </button>
+
+      <button id="closeModalBottom" class="px-4 py-2 text-white bg-indigo-500 rounded">
+        Close
+      </button>
+    </div>
+  </dialog>
+
+  <script type="module" src="journal.js"></script>
 </body>
 
 </html>
