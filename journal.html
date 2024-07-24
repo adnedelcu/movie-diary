@@ -5,121 +5,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ALTschool | Movie Diary</title>
+
+  <!-- external resources -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-
-  <style>
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-      100% { transform: translateY(0px); }
-    }
-    .floating {
-      animation: float 4s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-    .pulse {
-      animation: pulse 2s infinite;
-    }
-    .movie-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-    }
-    .movie-poster {
-      padding-top: 1rem;
-      height: 300px;
-      object-fit: contain;
-      width: 100%;
-    }
-    .gradient-border {
-      position: relative;
-      background: linear-gradient(to right, #ff00ff, #ffffff, #40e0d0);
-      padding: 3px;
-      border-radius: 0.375rem;
-    }
-    .gradient-border-span {
-      display: block;
-      background: #4a5568;
-      padding: 0.5rem 1rem;
-      border-radius: 0.25rem;
-    }
-    html:has(dialog[open]) {
-      overflow: hidden;
-    }
-
-    @keyframes scaleDown {
-      0% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      100% {
-        opacity: 0;
-        transform: scale(0);
-      }
-    }
-
-    @keyframes slideInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(20%);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    dialog[open]::backdrop {
-      backdrop-filter: blur(5px);
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      dialog {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-
-      dialog.showing {
-        animation: slideInUp 0.3s ease-out forwards;
-      }
-
-      dialog.closing {
-        animation: scaleDown 0.3s ease-in forwards;
-      }
-    }
-
-    .close-button {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="bg-gray-900 text-white">
-  <!-- Header -->
+  <!-- header section -->
   <header>
     <nav class="container mx-auto flex justify-between items-center py-6">
-      <!-- Logo -->
-      <a href="./index.html" class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">:\ALTschool</a>
+      <!-- logo with gradient text effect -->
+      <a href="./index.html"
+        class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">:\ALTschool</a>
       <div class="space-x-4">
-        <!-- Links -->
-        <a href="./index.html" class="text-xl hover:text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 transition duration-300">Discover</a>
-        <a href="./journal.html" class="text-xl hover:text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 transition duration-300">My Diary</a>
+        <!-- navigation links with hover effects -->
+        <a href="./index.html"
+          class="text-xl hover:text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 transition duration-300">Discover</a>
+        <a href="./journal.html"
+          class="text-xl hover:text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 transition duration-300">My
+          Diary</a>
       </div>
     </nav>
-    <!-- Hero -->
+    <!-- hero section -->
     <div class="container mx-auto text-center py-20">
-      <!-- Content -->
-      <h1 class="text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-cyan-200 floating">ALTschool Movie Diary</h1>
+      <!-- main heading with floating animation -->
+      <h1
+        class="text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-cyan-200 floating">
+        ALTschool Movie Diary</h1>
       <p class="text-2xl mb-12">Your personal journey through the world of cinema begins here.</p>
-      <!-- Search -->
+      <!-- search input and button -->
       <div class="flex items-center justify-center space-x-4 max-w-3xl mx-auto">
         <input type="text" placeholder="Explore movies..." class="w-full bg-gray-800 text-white px-6 py-3 rounded" />
         <button class="gradient-border w-28 hover:text-slate-950 hover:animate-pulse">
@@ -131,20 +47,19 @@
     </div>
   </header>
 
-  <!-- Movie Container / Grid -->
+  <!-- main content area -->
   <main class="container mx-auto py-20 px-4">
     <h2 class="text-4xl font-bold mb-12 text-center">Your Movie Diary</h2>
+    <!-- movie grid container -->
     <div id="movie-grid" class="movie-grid">
+      <!-- movie card template -->
       <template id="movie-card">
         <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-          <!-- Movie Poster -->
-          <img src="https://c8.alamy.com/comp/AX539P/dune-poster-for-1984-dino-de-laurentiis-film-with-sting-AX539P.jpg" alt="Movie Poster" class="movie-poster" />
-          <!-- Movie Details || Name-->
+          <img src="https://c8.alamy.com/comp/AX539P/dune-poster-for-1984-dino-de-laurentiis-film-with-sting-AX539P.jpg"
+            alt="Movie Poster" class="movie-poster" />
           <div class="p-4">
             <h3 class="text-xl font-semibold mb-2 text-center truncate">DUNE</h3>
-            <!-- Movie Details || Year | Genre -->
             <p class="text-gray-400 mb-4 text-center">1984 | Science Fiction</p>
-            <!-- Movie Details || Add to Diary -->
             <button class="bg-red-500 h-10 w-full rounded-lg hover:bg-red-700">
               <span class="flex items-center justify-center">
                 <i class="fas fa-xmark mr-2"></i>Remove
@@ -153,53 +68,44 @@
           </div>
         </div>
       </template>
-
-      <!-- Movie Cards Template // edit for loop as you wish -->
-      <script>
-        // const movieCardTemplate = document.getElementById('movie-card').content;
-        // const movieGrid = document.querySelector('.movie-grid');
-        // for (let i = 0; i < 24; i++) {
-        //   const movieCardClone = movieCardTemplate.cloneNode(true);
-        //   movieGrid.appendChild(movieCardClone);
-        // }
-      </script>
     </div>
   </main>
 
-  <!-- Footer -->
+  <!-- footer section -->
   <footer class="bg-gray-800 text-white py-10">
     <div class="container mx-auto text-center">
       <p>&copy; 2024 ALTschool. Embark on your cinematic journey.</p>
     </div>
   </footer>
 
-  <dialog id="modal" class="relative p-6 bg-white rounded-lg shadow-lg w-1/2">
-    <button id="closeModalTop" class="close-button">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-700 hover:text-gray-900" fill="none"
-        viewBox="0 0 24 24" stroke="currentColor">
+  <!-- modal for movie notes -->
+  <dialog id="modal" class="relative p-6 rounded-lg shadow-lg w-full max-w-2xl">
+    <button id="closeModalTop" class="absolute top-2 right-2 text-gray-400 hover:text-white transition duration-300">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
-    <h2 class="mb-4 text-lg font-semibold" id="movieTitle"></h2>
+    <h2 id="movieTitle"
+      class="text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"></h2>
 
-    <ul id="movieNotes"></ul>
+    <ul id="movieNotes" class="space-y-2 mb-4"></ul>
 
-    <label for="new-note" class="mb-6">
-      New note
-      <input type="text" id="new-note" name="new-note" placeholder="Enter your note..." class="w-full bg-gray-800 text-white px-6 py-3 rounded" required>
-    </label>
-
-    <div class="flex justify-end space-x-2">
-      <button id="addNote" class="px-4 py-2 text-black bg-green-700 rounded">
+    <div class="mt-4">
+      <input type="text" id="new-note" name="new-note" placeholder="Enter your note..."
+        class="w-full bg-gray-700 text-white px-4 py-2 rounded-lg mb-2" required>
+      <button id="addNote"
+        class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-2 px-4 rounded-lg hover:from-purple-600 hover:to-pink-600 transition duration-300">
         Add note
       </button>
-
-      <button id="closeModalBottom" class="px-4 py-2 text-white bg-indigo-500 rounded">
-        Close
-      </button>
     </div>
+
+    <button id="closeModalBottom"
+      class="mt-4 bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300">
+      Close
+    </button>
   </dialog>
 
+  <!-- javascript file for journal functionality -->
   <script type="module" src="journal.js"></script>
 </body>
 
