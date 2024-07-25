@@ -195,23 +195,6 @@
     border-radius: 0.25rem;
 }
 
-#addNote,
-#closeModalBottom {
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    font-weight: bold;
-}
-
-#addNote {
-    background-color: #10B981;
-    color: white;
-}
-
-#closeModalBottom {
-    background-color: #6B7280;
-    color: white;
-}
-
 html:has(dialog[open]) {
     overflow: hidden;
 }
@@ -257,11 +240,4 @@ dialog[open]::backdrop {
     dialog.closing {
         animation: scaleDown 0.3s ease-in forwards;
     }
-}
-
-.close-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    cursor: pointer;
 }

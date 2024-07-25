@@ -48,7 +48,7 @@
   </header>
 
   <!-- main content area -->
-  <main class="container mx-auto py-20 px-4">
+  <main class="container mx-auto pb-20 px-4">
     <h2 class="text-4xl font-bold mb-12 text-center">Your Movie Diary</h2>
     <!-- movie grid container -->
     <div id="movie-grid" class="movie-grid">
@@ -93,16 +93,13 @@
     <div class="mt-4">
       <input type="text" id="new-note" name="new-note" placeholder="Enter your note..."
         class="w-full bg-gray-700 text-white px-4 py-2 rounded-lg mb-2" required>
-      <button id="addNote"
-        class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-2 px-4 rounded-lg hover:from-purple-600 hover:to-pink-600 transition duration-300">
+      <button id="addNote">
         Add note
       </button>
+      <button id="closeModalBottom">
+        Close
+      </button>
     </div>
-
-    <button id="closeModalBottom"
-      class="mt-4 bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300">
-      Close
-    </button>
   </dialog>
 
   <!-- javascript file for journal functionality -->
