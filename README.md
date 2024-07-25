@@ -1,107 +1,133 @@
 # 🎬 Movie Diary using TMDB API 📖
 
-
-Welcome to the Movie Diary project! This project allows you to create a personal movie diary using the TMDB API.
-The project consists of a Homepage to display popular movies and a Journal Page to manage your favorite movies and personal notes.
+Welcome to the Movie Diary project! This application allows you to create a personal movie diary using the TMDB API. The project consists of a Homepage to display popular movies and a Journal Page to manage your favorite movies and personal notes.
 
 ## 🧑‍💻 Project Details
 
 - **Project Name:** ALTschool | Movie Diary
 - **Project Status:** In Progress (since 18.07.2024)
 - **Project Description:** Create a personal movie diary using the TMDB API. (Group Project)
-- **Project Github Link:** [\:\ALTschool](https://github.com/adnedelcu/movie-diary)
+- **Project Github Link:** [:\ALTschool](https://github.com/adnedelcu/movie-diary)
 - **Project Duration:** 10 Days
 - **Project Objective Url:** [Movie diary or Pokedex](https://learn.wbscodingschool.com/courses/full-stack-web-app/lessons/%f0%9f%9b%a0%ef%b8%8f-movie-diary-or-pokedex/)
 
----
+## 📁 Project Structure
 
-## 📅 Project Roadmap
+```
+movie-diary/
+├── .gitignore
+├── config.js.example
+├── index.html
+├── journal.html
+├── journal.js
+├── LICENSE
+├── main.js
+├── README.md
+├── shared.js
+├── style.css
+└── tailwind.config.js
+```
 
-### 1. Setup HTML and CSS
+## 🛠️ Setup and Installation
 
-- **Include TailwindCSS in HTML**
-- **Create basic HTML structure**
-  - `index.html` (Homepage)
-  - `journal.html` (Journal Page)
+1. Clone the repository:
+   ```
+   git clone https://github.com/adnedelcu/movie-diary.git
+   ```
+2. Navigate to the project directory:
+   ```
+   cd movie-diary
+   ```
+3. Copy `config.js.example` to `config.js` and add your TMDB API key:
+   ```
+   cp config.js.example config.js
+   ```
+   Then edit `config.js` and replace `'SAMPLE_API_KEY'` with your actual TMDB API key.
 
+4. Open `index.html` in your browser to view the project.
 
+## 🖥️ Components and Functionality
 
-### 2. Create Directory Structure
+### HTML Structure (`index.html` and `journal.html`)
 
-movie-dairy/
-- .gitignore
-- config.js.example
-- index.html
-- journal.html
-- journal.js
-- LICENSE
-- main.js
-- README.md
-- tailwind.config.js
+Both pages include:
+- Navbar for navigation
+- Header section
+- Search container with dropdown menu
+- Grid for displaying movies
+- Movie card structure
 
+Additional elements in `journal.html`:
+- Container for displaying favorite movies
+- Structure for adding personal notes to each movie
 
-### 3. CSS Styling with TailwindCSS
+### CSS Styling (`style.css` and Tailwind)
 
-- Style the landing page
-- Style the journal page
-- Style the navbar
-- Style the search bar
-- Style the movie grid
-- Style the movie card
-- Style the movie title & description
-- Style buttons (e.g., Add to Diary, Search)
+- Utilizes TailwindCSS for responsive design
+- Custom styles in `style.css` for additional formatting
+- Includes animations for enhanced user experience
+- Responsive grid layout for movie display
+- Custom styling for movie cards, buttons, and modal
 
-**💡 Tip:** Refer to the [TailwindCSS Documentation](https://tailwindcss.com/docs) for various styling options.
+### JavaScript Functionality
 
+#### Main Script (`main.js`)
+- Fetches and displays popular movies
+- Handles user interactions (e.g., adding movies to favorites)
+- Implements search functionality
+- Manages pagination for movie listings
 
-### 4. HTML Structure and Elements
+#### Journal Script (`journal.js`)
+- Manages favorite movies using `localStorage`
+- Handles adding and removing movies from favorites
+- Manages personal notes for each movie
 
-- **Homepage (`index.html`)**
-  - Create a navbar. (include in Journal Page also)
-  - Create a Header section. (include in Journal Page also)
-  - Create a container for searching movies with dropdown menu. (include in Journal Page also)
-  - Create a grid for displaying movies. (include in Journal Page also)
-  - Create a card structure for each movie. (include in Journal Page also)
-- **Journal Page (`journal.html`)**
-  - Create a container for displaying favorite movies.
-  - Create a structure for adding personal notes to each movie.
+#### Shared Functions (`shared.js`)
+- Contains utility functions used across the application
+- Manages journal operations (add, remove, update)
+- Handles note management
+- Creates movie card elements
 
+## 🚀 Features
 
-### 5. JavaScript Functionality
+- Display popular movies from TMDB API
+- Search functionality for finding specific movies
+- Add movies to personal journal
+- Add and manage notes for each movie in the journal
+- Responsive design for various screen sizes
+- Pagination for browsing through movie listings
 
-- **main.js**
-  - Import necessary functions from modules.
-  - Fetch popular movies and display them.
-  - Handle user interactions (e.g., adding movies to favorites).
+## 🎨 UI/UX Guidelines
 
-- **journal.js**
-  - Add a movie to favorites (using `localStorage`).
-  - Retrieve favorite movies from `localStorage`.
-  - Add personal notes to each movie.
+- Use a dark theme for better visibility of movie posters
+- Implement gradient effects for buttons and titles
+- Ensure responsive design for all screen sizes
+- Use animations sparingly to enhance user experience without overwhelming
+- Maintain consistent styling across all pages
 
+## 🧑‍💻 Development Guidelines
 
----
-
-## 🚀 Navigation
-
-- **Create a navbar** for both pages to navigate between the Homepage and the Journal Page.
-- **Maybe create a discovery page** to display popular movies.
-
----
+- Follow ES6+ JavaScript standards
+- Use modular JavaScript for better code organization
+- Implement error handling for API requests
+- Optimize images and API calls for performance
+- Follow accessibility best practices
 
 ## 📚 Useful Resources
 
 - [GitHub Repository Structure](https://guides.github.com/introduction/flow/)
 - [TMDB API Documentation](https://developers.themoviedb.org/3/getting-started/introduction)
 - [Javascript Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [TailwindCSS CDN](https://tailwindcss.com/docs/installation)
+- [TailwindCSS Documentation](https://tailwindcss.com/docs)
 - [Node.js Documentation](https://nodejs.org/en/)
 - [NPM Documentation](https://www.npmjs.com/)
 
----
+## 🤝 Contributors
 
-## 🧑‍💻 Contributors
+- [Alex](https://github.com/adnedelcu)
+- [Lisa](https://github.com/orangethief)
+- [Tima](https://github.com/timataliatov)
 
-- [ Alex ](https://github.com/adnedelcu)
-- [ Lisa ](https://github.com/orangethief)
-- [ Tima ](https://github.com/timataliatov)
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
