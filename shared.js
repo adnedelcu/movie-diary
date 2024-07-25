@@ -85,8 +85,8 @@ export function showNotes(movie) {
   const closeModalTop = document.getElementById('closeModalTop');
   const closeModalBottom = document.getElementById('closeModalBottom');
 
-  closeModalTop.className = 'absolute top-2 right-2 text-gray-400 hover:text-white transition duration-300';
-  closeModalBottom.className = 'mt-4 bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300';
+  closeModalTop.className = 'absolute top-2 right-2 text-gray-500 hover:text-white transition duration-300';
+  closeModalBottom.className = 'mt-4 bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-300';
 
   closeModalTop.onclick = closeModal;
   closeModalBottom.onclick = closeModal;
