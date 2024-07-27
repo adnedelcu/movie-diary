@@ -1,5 +1,5 @@
 import { API_KEY } from './config.js';
-import { createMovieCard } from './shared.js';
+import { createMovieCard, debounce } from './shared.js';
 
 // get current page from URL parameters
 const searchParams = new URLSearchParams(window.location.search);
@@ -16,6 +16,8 @@ const searchBar = document.querySelector('input');
 const resultDiv = document.getElementById('grid-search-results');
 const currentPageEl = document.getElementById('currentPage');
 const maxPagesEl = document.getElementById('maxPages');
+
+resultDiv.classList.add('hidden');
 
 let maxPages = 1;
 currentPageEl.innerText = currentPage;
@@ -46,6 +48,7 @@ async function handleSearch(event) {
     const searchUrl = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&api_key=${API_KEY}`
 
     if (query.length === 0) {
+        resultDiv.classList.add('hidden');
         resultDiv.innerHTML = '';
         return;
     }
@@ -63,23 +66,15 @@ async function handleSearch(event) {
 function displayResults(data) {
     resultDiv.innerHTML = '';
 
+    resultDiv.classList.remove('hidden');
     if (data.results && data.results.length > 0) {
-        data.results.forEach(movie => {
+      data.results.forEach(movie => {
             const templateDiv = createMovieCard(movie);
             resultDiv.appendChild(templateDiv);
         });
     } else {
         resultDiv.textContent = "No results found.";
     }
-}
-
-// utility function to debounce the search input
-function debounce(func, wait) {
-    let timeout;
-    return function(...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
-    };
 }
 
 // update pagination

@@ -98,7 +98,14 @@ export function createNote(note, movie) {
 
   const noteText = document.createElement('p');
   noteText.className = 'text-white';
-  noteText.innerText = note.note;
+  noteText.innerHTML = note.note;
+
+  dayjs.extend(dayjs_plugin_relativeTime);
+  const createdAt = dayjs(note.created_at);
+  const createdAtEl = document.createElement('cite');
+  createdAtEl.innerText = createdAt.fromNow();
+  createdAtEl.classList.add('block', 'text-sm', 'text-gray-500', 'dark:text-gray-400');
+  noteText.appendChild(createdAtEl);
 
   const removeNoteBtn = document.createElement('button');
   removeNoteBtn.type = 'button';
@@ -130,7 +137,7 @@ export const genres = [
 // movie card creation
 export const createMovieCard = (movie, isDiary = false) => {
   const templateDiv = document.createElement('div');
-  templateDiv.classList.add('bg-gray-800', 'rounded-lg', 'overflow-hidden', 'shadow-lg');
+  templateDiv.classList.add('bg-gray-800', 'rounded-lg', 'overflow-hidden', 'shadow-lg', 'movie-card');
 
   const poster = document.createElement('img');
   poster.src = movie.poster_path
@@ -187,4 +194,13 @@ function createButton(text, iconClass, onClick) {
   button.appendChild(span);
   button.addEventListener('click', onClick);
   return button;
+}
+
+// utility function to debounce the search input
+export const debounce = (func, wait) => {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
 }
